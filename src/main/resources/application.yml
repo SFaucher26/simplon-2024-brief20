@@ -3,8 +3,8 @@ spring:
     name: brief20
   datasource:
     url: jdbc:postgresql://localhost:5432/app
-    username: app
-    password: app
+    username: postgres
+    password: postgres
   jpa:
     database: postgresql
     hibernate:

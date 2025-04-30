@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 <body>
     <header th:replace="components/navbar :: navbar"></header>
     <main>
         <h1>Login</h1>
-        <form th:action="@{/login}" method="post">
+<!--        balise htmx qui fait un post sur le endpoint login-->
+        <form th:action="@{/login}" th:method="POST" hx-post="/login" hx-target="main" hx-swap="innerHTML">
             <label>Username: <input type="text" name="username" required/></label><br/>
             <label>Password: <input type="password" name="password" required/></label><br/>
             <button type="submit">Login</button>
         </form>
+        <div id="user"></div>
+        <button type="button" data-cc="show-preferencesModal">
+            Manage cookie preferences
+        </button>
         <div th:if="${param.error}">
             <p style="color:red">Invalid username or password.</p>
         </div>
@@ -22,5 +29,6 @@
         </div>
     </main>
     <footer th:replace="components/footer :: footer"></footer>
+    <script type="module" src="/js/cookieConfig.js"></script>
 </body>
 </html>
