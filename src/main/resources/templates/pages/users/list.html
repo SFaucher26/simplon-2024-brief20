@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Users</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 <body>
     <header th:replace="components/navbar :: navbar"></header>
@@ -12,7 +13,8 @@
         <a th:href="@{/users/create}">Create User</a>
         <table>
             <tr><th>ID</th><th>Username</th><th>Role</th><th>Actions</th></tr>
-            <tr th:each="user : ${users}">
+<!--            Recupération de la liste de users en htmx-->
+            <tr th:each="user : ${users}" hx-get="@{/users/details/{id}(id=${user.id})}" hx-target="#details" >
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.role}"></td>
@@ -26,6 +28,7 @@
                 </td>
             </tr>
         </table>
+        <div id="details"></div>
     </main>
     <footer th:replace="components/footer :: footer"></footer>
 </body>
